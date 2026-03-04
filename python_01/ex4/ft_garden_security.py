@@ -4,12 +4,13 @@
 #                                                          :::      ::::::::  #
 #   ft_garden_security.py                                :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/03 21:10:53 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/03 22:27:51 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/04 13:45:17 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/04 13:45:18 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
 
 class Segurity_factory:
     def __init__(self, name: str, height: int, age: int) -> None:

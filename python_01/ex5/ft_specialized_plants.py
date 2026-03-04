@@ -4,12 +4,13 @@
 #                                                          :::      ::::::::  #
 #   ft_specialized_plants.py                             :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/03 22:56:24 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/04 00:35:23 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/04 13:45:25 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/04 13:45:26 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
 
 class Plant:
     def __init__(self, name: str, height: int, age: int) -> None:

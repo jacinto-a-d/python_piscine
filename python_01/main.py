@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   main.py                                              :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/26 17:08:10 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/04 00:39:13 by dipekko            ###   ########.fr      #
+#   Updated: 2026/03/04 13:28:30 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -130,7 +130,7 @@ def main() -> None:
     print("")
     print(" === Choose a number to check ===")
     print("")
-    print("0 -> ex0 ft_garden_intro")
+    print("0 -> ft_garden_intro")
     print("1 -> ft_garden_data")
     print("2 -> ft_plant_growth")
     print("3 -> ft_plant_factory")

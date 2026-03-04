@@ -4,12 +4,13 @@
 #                                                          :::      ::::::::  #
 #   ft_garden_data.py                                    :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/02/25 20:10:54 by jabad-di            #+#    #+#            #
-#   Updated: 2026/02/26 18:16:45 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/04 13:44:44 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/04 13:44:58 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
 
 class Plant:
     """creation of a data structure called class"""

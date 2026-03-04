@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   ft_plant_growth.py                                   :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/02/26 18:18:57 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/03 21:01:00 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/04 13:45:01 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/04 13:45:03 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 

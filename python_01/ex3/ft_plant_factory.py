@@ -4,12 +4,13 @@
 #                                                          :::      ::::::::  #
 #   ft_plant_factory.py                                  :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/02/26 19:30:44 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/03 21:00:56 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/04 13:45:10 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/04 13:45:11 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
 
 class Plant:
     """creation of a data structure called class"""
