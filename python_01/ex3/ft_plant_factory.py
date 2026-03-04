@@ -2,12 +2,12 @@
 # ########################################################################### #
 #                                                                             #
 #                                                          :::      ::::::::  #
-#   ft_garden_data.py                                    :+:      :+:    :+:  #
+#   ft_plant_factory.py                                  :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/02/25 20:10:54 by jabad-di            #+#    #+#            #
-#   Updated: 2026/02/26 18:16:45 by dipekko            ###   ########.fr      #
+#   Created: 2026/02/26 19:30:44 by dipekko             #+#    #+#            #
+#   Updated: 2026/03/03 21:00:56 by dipekko            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -19,16 +19,23 @@ class Plant:
         self.height: int = height
         self.age: int = age
 
+    def status(self) -> None:
+        """generic phrase printout"""
+        print(f"Created: {self.name} ({self.height}cm, {self.age} days)")
+
 
 def main() -> None:
-    "run a demonstration of the class"
-    line_1 = Plant("Rose", 25, 30)
-    line_2 = Plant("Sunflower", 80, 45)
-    line_3 = Plant("Cactus", 15, 120)
-    print("=== Garden Plant Registry ===")
-    print(f"{line_1.name}: {line_1.height}cm, {line_1.age} days old")
-    print(f"{line_2.name}: {line_2.height}cm, {line_2.age} days old")
-    print(f"{line_3.name}: {line_3.height}cm, {line_3.age} days old")
+    "run a demonstration five plant"
+    plant_factory: list[Plant] = [
+        Plant("Rose", 25, 30),
+        Plant("oak", 200, 365),
+        Plant("cactus", 5, 90),
+        Plant("sunflower", 80, 45),
+        Plant("fern", 15, 120)
+    ]
+    print("=== Plant Factory Output ===")
+    for plant in plant_factory:
+        plant.status()
 
 
 if __name__ == "__main__":
