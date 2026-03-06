@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   ft_garden_analytics.py                               :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/04 13:45:30 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/05 14:40:58 by dipekko            ###   ########.fr      #
+#   Updated: 2026/03/06 14:57:40 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -39,6 +39,7 @@ class FloweringPlant(Plant):
     ) -> None:
         super().__init__(name, height)
         self.color: str = color
+        self.point: int = 10
         self.category: str = "flowering"
 
     def get_info(self) -> str:
@@ -52,10 +53,10 @@ class PrizerFlower(FloweringPlant):
         name: str,
         height: int,
         color: str,
-        point: int
+        extra_point: int
     ) -> None:
         super().__init__(name, height, color)
-        self.point: int = point
+        self.point: int = 10 + extra_point
         self.category: str = "prize flowers"
 
     def get_info(self) -> str:
@@ -78,7 +79,7 @@ class GardenManager:
             """x"""
             total_score: int = 0
             for ts in plants:
-                total_score += ts.point
+                total_score += ts.height + ts.point
             return total_score
 
         def get_count_growth(self, plant: list) -> dict:
@@ -163,9 +164,18 @@ class GardenManager:
     @classmethod
     def display_summary(cls, network: list) -> None:
         """x"""
-        score: str = 
+        print("Garden score - ", end="")
+        first = True
+        
+        for sc in network:
+            if not first:
+                print(", ", end="")
+            
+            score = sc.stats.garden_score(sc.jardines)
+            print(f"{sc.name}: {score}", end="")
+            first = False
 
-        print(score_line)
+        print("")
         print(f"Total garden managed: {cls.total_manager}")
 
     @staticmethod
