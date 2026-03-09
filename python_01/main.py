@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   main.py                                              :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
+#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/26 17:08:10 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/04 13:28:30 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/03/08 17:36:54 by dipekko            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -15,6 +15,8 @@ from ex0.ft_garden_intro import plant, height, age
 from ex2.ft_plant_growth import Plant
 from ex4.ft_garden_security import Segurity_factory
 from ex5.ft_specialized_plants import Vegetable, Flower, Tree
+from ex6.ft_garden_analytics import GardenManager, FloweringPlant, \
+    PrizerFlower, Plant as PlantEx6
 
 
 def test_0() -> None:
@@ -126,16 +128,47 @@ def test_5() -> None:
     print("")
 
 
+def test_6() -> None:
+    print("")
+    GardenManager.title()
+
+    names: list = ["Alice", "Bob"]
+    network: list = GardenManager.create_garden_network(names)
+    alice_garden: GardenManager = network[0]
+    bob_garden: GardenManager = network[1]
+
+    tree: list = PlantEx6("Oak Tree", 100)
+    rose: list = FloweringPlant("Rose", 25, "Red")
+    daisy: list = FloweringPlant("Daisy", 9, "Yellow")
+    sunflower: list = PrizerFlower("Sunflower", 50, "Yellow", 0)
+
+    alice_garden.add_plants(tree)
+    alice_garden.add_plants(rose)
+    alice_garden.add_plants(daisy)
+    alice_garden.add_plants(sunflower)
+
+    bob_plant: list = PlantEx6("Old Bush", 92)
+    bob_garden.add_plants(bob_plant)
+    print("")
+    print("Alice helping all plants grow...")
+    alice_garden.grow_all()
+    print("")
+    alice_garden.display_report()
+    GardenManager.display_summary(network)
+    print("")
+
+
 def main() -> None:
     print("")
     print(" === Choose a number to check ===")
     print("")
-    print("0 -> ft_garden_intro")
-    print("1 -> ft_garden_data")
-    print("2 -> ft_plant_growth")
-    print("3 -> ft_plant_factory")
-    print("4 -> ft_garden_security")
-    print("5 -> ft_specialized_plants")
+    print("0 -> ex0 -> ft_garden_intro")
+    print("1 -> ex1 -> ft_garden_data")
+    print("2 -> ex2 -> ft_plant_growth")
+    print("3 -> ex3 -> ft_plant_factory")
+    print("4 -> ex4 -> ft_garden_security")
+    print("5 -> ex5 -> ft_specialized_plants")
+    print("6 -> ex6 -> ft_garden_analitics")
     print("")
     choice = str(input("Enter a number: "))
     if choice == "0":
@@ -150,6 +183,8 @@ def main() -> None:
         test_4()
     elif choice == "5":
         test_5()
+    elif choice == "6":
+        test_6()
     else:
         print("Error: Number no valid.")
 

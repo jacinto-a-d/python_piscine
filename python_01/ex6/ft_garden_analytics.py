@@ -4,16 +4,16 @@
 #                                                          :::      ::::::::  #
 #   ft_garden_analytics.py                               :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
+#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/04 13:45:30 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/06 14:57:40 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/03/09 16:55:57 by dipekko            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 
 class Plant:
-    """x"""
+    """Base class representing a generic plant with growth tracking."""
     def __init__(self, name: str, height: int) -> None:
         self.name: str = name
         self.height: int = height
@@ -26,11 +26,11 @@ class Plant:
         print(f"{self.name} grew {self.height}cm")
 
     def get_info(self) -> str:
-        return f"- {self.name} ({self.height}cm)"
+        return f"- {self.name} {self.height}cm"
 
 
 class FloweringPlant(Plant):
-    """x"""
+    """A plant that produces flowers and has a higher base point value."""
     def __init__(
         self,
         name: str,
@@ -47,7 +47,10 @@ class FloweringPlant(Plant):
 
 
 class PrizerFlower(FloweringPlant):
-    """x"""
+    """
+    A premium flower category
+    that includes additional competitive points.
+    """
     def __init__(
         self,
         name: str,
@@ -56,7 +59,7 @@ class PrizerFlower(FloweringPlant):
         extra_point: int
     ) -> None:
         super().__init__(name, height, color)
-        self.point: int = 10 + extra_point
+        self.point: int = self.point + extra_point
         self.category: str = "prize flowers"
 
     def get_info(self) -> str:
@@ -64,26 +67,27 @@ class PrizerFlower(FloweringPlant):
 
 
 class GardenManager:
-    """x"""
+    """Handles garden operations, plant lists, and status reporting."""
     total_manager: int = 0
 
     class GardenStats:
-        """x"""
-        def total_points(self, plants_list: list) -> int:
-            total: int = 0
-            for pl in plants_list:
-                total += pl.point
-            return total
-
-        def garden_score(sel, plants: list) -> int:
-            """x"""
+        """
+        Internal helper
+        for calculating various garden performance metrics.
+        """
+        def garden_score(sel, plants: list[str]) -> int:
+            """Calculates a total score based on height and plant points."""
             total_score: int = 0
             for ts in plants:
                 total_score += ts.height + ts.point
             return total_score
 
-        def get_count_growth(self, plant: list) -> dict:
-            counts: dict = {
+        def get_count_growth(self, plant: list[str]) -> dict:
+            """
+            Generates a summary of total growth
+            and category distribution.
+            """
+            counts: dict[str, int] = {
                 "total_growth": 0,
                 "total_count": 0,
                 "regular": 0,
@@ -105,44 +109,51 @@ class GardenManager:
 
             return counts
 
-        def total_height(self, plants_list: list) -> int:
+        def total_height(self, plants_list: list[str]) -> int:
+            """Calculates the sum of heights for all plants in the list."""
             suma: int = 0
             for su in plants_list:
                 suma += su.height
             return suma
 
-    def __init__(self, name: str, jardines: list = None) -> None:
+    def __init__(self, name: str, gardens: list[str] = None) -> None:
         self.name: str = name
-        self.jardines: list = jardines if jardines is not None else []
+        self.gardens: list[str] = gardens if gardens is not None else []
         self.stats = self.GardenStats()
 
     def add_plants(self, plant: Plant) -> None:
-        self.jardines = self.jardines + [plant]
+        """Adds a new plant instance to the garden list."""
+        self.gardens = self.gardens + [plant]
         print(f"Added {plant.name} to {self.name}'s garden")
 
     def grow_all(self) -> None:
-        for a in self.jardines:
+        """Triggers the growth method for every plant in the garden."""
+        for a in self.gardens:
             a.grow()
 
     @classmethod
-    def create_garden_network(cls, garden_list: list = None) -> list:
-        """x"""
-        red: list = []
-        names: list = garden_list if garden_list else []
+    def create_garden_network(cls, garden_list: list[str] = None) -> list:
+        """
+        Initializes multiple GardenManager instances
+        from a list of names.
+        """
+        red: list[str] = []
+        names: list[str] = garden_list if garden_list else []
         for r in names:
-            now_garden = cls(r)
+            now_garden: GardenManager = cls(r)
             red = red + [now_garden]
             cls.total_manager += 1
         return red
 
     def display_report(self) -> None:
+        """Prints a detailed report of plants, growth, and validity checks."""
         print(f"=== {self.name}'s Garden Report ===")
         print("Plants in garden:")
 
-        for i in self.jardines:
+        for i in self.gardens:
             print(i.get_info())
 
-        data: dict = self.stats.get_count_growth(self.jardines)
+        data: dict[str, int] = self.stats.get_count_growth(self.gardens)
 
         print("")
         print(
@@ -156,48 +167,56 @@ class GardenManager:
         )
 
         is_valid: bool = True
-        for v in self.jardines:
+        for v in self.gardens:
             if v.height < 0:
-                is_valid = False
+                is_valid: bool = False
         print(f"height validartion test: {is_valid}")
 
     @classmethod
-    def display_summary(cls, network: list) -> None:
-        """x"""
+    def display_summary(cls, network: list[str]) -> None:
+        """Displays total scores for all gardens in the network"""
+
         print("Garden score - ", end="")
-        first = True
-        
+        first: bool = True
+
         for sc in network:
             if not first:
                 print(", ", end="")
-            
-            score = sc.stats.garden_score(sc.jardines)
+
+            score: int = sc.stats.garden_score(sc.gardens)
             print(f"{sc.name}: {score}", end="")
-            first = False
+            first: bool = False
 
         print("")
         print(f"Total garden managed: {cls.total_manager}")
 
     @staticmethod
     def title() -> None:
-        """x"""
+        """Prints the main system header."""
         print("=== Garden Management System Demo ===\n")
 
 
 def main() -> None:
+    """Executes the demonstration script for the garden system."""
     GardenManager.title()
 
-    names: list = ["Alice", "Bob"]
-    network: list = GardenManager.create_garden_network(names)
+    names: list[str] = ["Alice", "Bob"]
+    network: list[str] = GardenManager.create_garden_network(names)
     alice_garden: GardenManager = network[0]
+    bob_garden: GardenManager = network[1]
 
-    tree = Plant("Oak Tree", 100)
-    rose = FloweringPlant("Rose", 26, "Red")
-    sunflower = PrizerFlower("Sunflower", 51, "Yellow", 10)
+    tree: list[str, int] = Plant("Oak Tree", 100)
+    rose: list[str, int] = FloweringPlant("Rose", 25, "Red")
+    daisy: list[str, int] = FloweringPlant("Daisy", 9, "Yellow")
+    sunflower: list[str, int] = PrizerFlower("Sunflower", 50, "Yellow", 0)
 
     alice_garden.add_plants(tree)
     alice_garden.add_plants(rose)
+    alice_garden.add_plants(daisy)
     alice_garden.add_plants(sunflower)
+
+    bob_plant: list[str, int] = Plant("Old Bush", 92)
+    bob_garden.add_plants(bob_plant)
     print("")
     print("Alice helping all plants grow...")
     alice_garden.grow_all()
