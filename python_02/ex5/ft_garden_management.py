@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   ft_garden_management.py                              :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/09 16:00:45 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/09 23:36:34 by dipekko            ###   ########.fr      #
+#   Updated: 2026/03/10 17:37:47 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -24,12 +24,12 @@ class WaterError(GardenError):
 
 
 class GardenManager:
-    """x"""
+    """Create manager the that manages errors in addition to garden."""
     def __init__(self) -> None:
         self.plants: list[str] = []
 
     def check_add_plant(self, name: str) -> None:
-        """Adds a plant using only authorized operatiors"""
+        """Adds a plant using only authorized operators"""
         try:
             if name == "":
                 raise PlantError("Plant name cannot be empty!")
@@ -39,10 +39,10 @@ class GardenManager:
             print(f"Error adding plant: {e}")
 
     def check_water_plant(self) -> None:
-        """Demostrates finally block for cleanup"""
+        """Demonstrates finally block for cleanup"""
         print("Opening watering system")
         try:
-            if self.plants == "":
+            if not self.plants:
                 raise WaterError("Not enough water in tank")
             for plant in self.plants:
                 print(f"Watering {plant} - success")
@@ -52,12 +52,12 @@ class GardenManager:
             print("Closing watering system (cleanup)")
 
     def check_health_plant(self, name: str, water: int, sun: int) -> None:
-        """Valites health and handles errors"""
+        """Validates health and handles errors"""
         try:
             if water > 10:
                 raise WaterError(f"Water level {water} is too high (max 10)")
             if water < 1:
-                raise ValueError(f"Water level {water} is too low (min 1)")
+                raise WaterError(f"Water level {water} is too low (min 1)")
             if sun > 12:
                 raise PlantError(f"Sunlight hours {sun} is too high (max 12)")
             if sun < 2:
@@ -68,7 +68,7 @@ class GardenManager:
 
 
 def test_garden_management() -> None:
-    """x"""
+    """Executes the test suite for the garden management system."""
     print("=== Garden Management ===\n")
     manager: GardenManager = GardenManager()
     print("Adding plants to garden...")

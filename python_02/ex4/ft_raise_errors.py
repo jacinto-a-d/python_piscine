@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   ft_raise_errors.py                                   :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/09 14:36:37 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/09 15:58:36 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/10 17:25:54 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/10 17:25:58 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 

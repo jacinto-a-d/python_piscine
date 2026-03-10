@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   ft_custom_errors.py                                  :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/08 23:49:13 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/09 00:29:50 by dipekko            ###   ########.fr      #
+#   Updated: 2026/03/10 17:13:27 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -25,7 +25,7 @@ class WaterError(GardenError):
 
 def check_plant() -> None:
     """Simulates a plant health check and raises a PlantError."""
-    raise PlantError("The tomate plant is wilting!")
+    raise PlantError("The tomato plant is wilting!")
 
 
 def check_water() -> None:
@@ -57,7 +57,7 @@ def test_customs_errors() -> None:
 
 def main() -> None:
     """Entry point for the custom errors demonstration script."""
-    print("=== Custon Garden Errors Demo ===\n")
+    print("=== Custom Garden Errors Demo ===\n")
     test_customs_errors()
     print("\nAll custon error types work correctly!")
 

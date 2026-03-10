@@ -2,19 +2,20 @@
 # ########################################################################### #
 #                                                                             #
 #                                                          :::      ::::::::  #
-#   ft_ancient_recovery.py                               :+:      :+:    :+:  #
+#   ft_ancient_text.py                                   :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/09 23:51:13 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/10 00:34:06 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/10 17:35:15 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/10 17:36:56 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-def recovery_ancient_frafment() -> None:
-    """x"""
+
+def recovery_ancient_fragment() -> None:
+    """Accesses the ancient storage vault and recovers preserved data fragments."""
     try:
-        with open("ascent_fragment.txt", "r") as fd:
+        with open("ancient_fragment.txt", "r") as fd:
             print("Connection established...\n")
             print("RECOVERED DATA:")
 
@@ -28,8 +29,8 @@ def recovery_ancient_frafment() -> None:
 
 def main() -> None:
     print("=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===\n")
-    print("Accessing Storage Vault: ancient_fracment.txt")
-    recovery_ancient_frafment()
+    print("Accessing Storage Vault: ancient_fragment.txt")
+    recovery_ancient_fragment()
 
 
 if __name__ == "__main__":

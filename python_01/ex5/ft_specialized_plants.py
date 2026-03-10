@@ -7,7 +7,7 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/04 13:45:25 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/04 13:45:26 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/03/10 15:06:55 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -77,7 +77,7 @@ def main() -> None:
     for f in [f1, f2]:
         print(
             f"{f.name} (Flower): {f.height}cm, "
-            f"{f.age} days, {f.color} red"
+            f"{f.age} days, {f.color}"
             )
         f.bloom()
     print("")

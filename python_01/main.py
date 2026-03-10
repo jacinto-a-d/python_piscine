@@ -4,16 +4,15 @@
 #                                                          :::      ::::::::  #
 #   main.py                                              :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/26 17:08:10 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/08 17:36:54 by dipekko            ###   ########.fr      #
+#   Updated: 2026/03/10 15:11:20 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 from ex0.ft_garden_intro import plant, height, age
-from ex2.ft_plant_growth import Plant
-from ex4.ft_garden_security import Segurity_factory
+from ex4.ft_garden_security import Plant
 from ex5.ft_specialized_plants import Vegetable, Flower, Tree
 from ex6.ft_garden_analytics import GardenManager, FloweringPlant, \
     PrizerFlower, Plant as PlantEx6
@@ -74,7 +73,7 @@ def test_3() -> None:
 
 
 def test_4() -> None:
-    valid = Segurity_factory("Rose", 25, 30)
+    valid = Plant("Rose", 25, 30)
     print("")
     print("=== Garden Security System ===")
     print(f"Plant created: {valid.name}")

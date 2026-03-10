@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   ft_finally_block.py                                  :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/09 00:31:29 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/09 14:35:29 by dipekko            ###   ########.fr      #
+#   Updated: 2026/03/10 17:15:08 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,8 +16,8 @@ def water_plants(plant_list: list) -> None:
     The function uses try, except, and finally,
     handling errors and ensuring with finally that the code continues running.
     """
-    print("Opening watering system")
     try:
+        print("Opening watering system")
         for w in plant_list:
             if w is None:
                 raise TypeError

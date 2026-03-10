@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   ft_garden_analytics.py                               :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/04 13:45:30 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/09 16:55:57 by dipekko            ###   ########.fr      #
+#   Updated: 2026/03/10 16:16:49 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -75,7 +75,7 @@ class GardenManager:
         Internal helper
         for calculating various garden performance metrics.
         """
-        def garden_score(sel, plants: list[str]) -> int:
+        def garden_score(self, plants: list[Plant]) -> int:
             """Calculates a total score based on height and plant points."""
             total_score: int = 0
             for ts in plants:
@@ -205,17 +205,17 @@ def main() -> None:
     alice_garden: GardenManager = network[0]
     bob_garden: GardenManager = network[1]
 
-    tree: list[str, int] = Plant("Oak Tree", 100)
-    rose: list[str, int] = FloweringPlant("Rose", 25, "Red")
-    daisy: list[str, int] = FloweringPlant("Daisy", 9, "Yellow")
-    sunflower: list[str, int] = PrizerFlower("Sunflower", 50, "Yellow", 0)
+    tree: Plant = Plant("Oak Tree", 100)
+    rose: FloweringPlant = FloweringPlant("Rose", 25, "Red")
+    daisy: FloweringPlant = FloweringPlant("Daisy", 9, "Yellow")
+    sunflower: PrizerFlower = PrizerFlower("Sunflower", 50, "Yellow", 0)
 
     alice_garden.add_plants(tree)
     alice_garden.add_plants(rose)
     alice_garden.add_plants(daisy)
     alice_garden.add_plants(sunflower)
 
-    bob_plant: list[str, int] = Plant("Old Bush", 92)
+    bob_plant: Plant = Plant("Old Bush", 92)
     bob_garden.add_plants(bob_plant)
     print("")
     print("Alice helping all plants grow...")
