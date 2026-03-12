@@ -4,16 +4,18 @@
 #                                                          :::      ::::::::  #
 #   ft_ancient_text.py                                   :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
+#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/10 17:35:15 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/10 17:36:56 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/03/12 11:26:54 by dipekko            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 
 def recovery_ancient_fragment() -> None:
-    """Accesses the ancient storage vault and recovers preserved data fragments."""
+    """
+    Accesses the ancient storage vault and recovers preserved data fragments.
+    """
     try:
         with open("ancient_fragment.txt", "r") as fd:
             print("Connection established...\n")
