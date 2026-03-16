@@ -4,12 +4,13 @@
 #                                                          :::      ::::::::  #
 #   ft_coordinate_system.py                              :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/11 16:44:12 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/14 22:05:23 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/16 12:38:08 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/16 12:38:09 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
 
 import sys
 import math

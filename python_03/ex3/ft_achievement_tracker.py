@@ -4,12 +4,14 @@
 #                                                          :::      ::::::::  #
 #   ft_achievement_tracker.py                            :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/14 20:18:31 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/14 22:20:58 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/16 12:38:17 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/16 12:38:18 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
+
 
 def all_archievements(players: dict[str, set[str]]) -> set[str]:
     """x"""

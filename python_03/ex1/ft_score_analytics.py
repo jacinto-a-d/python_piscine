@@ -4,12 +4,13 @@
 #                                                          :::      ::::::::  #
 #   ft_score_analytics.py                                :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/11 14:02:00 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/11 16:13:47 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/16 12:38:00 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/16 12:38:01 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
 
 import sys
 

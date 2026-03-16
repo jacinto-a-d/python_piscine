@@ -4,12 +4,13 @@
 #                                                          :::      ::::::::  #
 #   ft_inventory_system.py                               :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/14 22:22:25 by dipekko             #+#    #+#            #
-#   Updated: 2026/03/15 17:25:29 by dipekko            ###   ########.fr      #
+#   Created: 2026/03/16 12:38:28 by jabad-di            #+#    #+#            #
+#   Updated: 2026/03/16 12:38:29 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
 
 import sys
 
