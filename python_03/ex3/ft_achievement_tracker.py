@@ -7,36 +7,38 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/16 12:38:17 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/16 12:38:18 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/03/17 19:32:46 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 
-
-def all_archievements(players: dict[str, set[str]]) -> set[str]:
-    """x"""
+def all_achievements(players: dict[str, set[str]]) -> set[str]:
+    """
+    Retrieves a union of all unique achievements earned
+    by all players.
+    """
     result: set[str] = set()
-    for name in players:
-        result = result.union(players[name])
+    for achievement in players.values():
+        result = result.union(achievement)
     return result
 
 
-def common_archievements(players: dict[str, set[str]]) -> set[str]:
-    """x"""
-    result: set[str] = set()
-    first: bool = True
-    for name in players:
-        if first:
-            result = players[name]
-            first = False
-        else:
-            result = result.intersection(players[name])
-    return result
+def common_achievements(players: dict[str, set[str]]) -> set[str]:
+    """
+    Identifies achievements that have been earned
+    by every single player.
+    """
+    if not players:
+        return set()
+    return set.intersection(*players.values())
 
 
-def rare_archievements(players: dict[str, set[str]]) -> set[str]:
-    """x"""
-    all_arch: set[str] = all_archievements(players)
+def rare_achievements(players: dict[str, set[str]]) -> set[str]:
+    """
+    Finds 'rare' achievements, defined as those owned
+    by exactly one player.
+    """
+    all_arch: set[str] = all_achievements(players)
     rare: set[str] = set()
     for arch in all_arch:
         count: int = 0
@@ -49,7 +51,11 @@ def rare_archievements(players: dict[str, set[str]]) -> set[str]:
 
 
 def main() -> None:
-    """x"""
+    """
+    Main entry point of the script.
+    Simulates the achievement tracking system and
+    prints analytics to the console.
+    """
     players: dict[str, set[str]] = {
         "Alice": {"first_kill", "level_10", "treasure_hunter", "speed_demon"},
         "Bob": {"first_kill", "level_10", "boss_slayer", "collector"},
@@ -58,39 +64,25 @@ def main() -> None:
             "speed_demon", "perfectionist"}
     }
 
-    all_possible: set[str] = {
-        "first_kill", "level_10", "treasure_hunter",
-        "speed_demon", "boss_slayer", "collector", "legendary_hero"
-    }
-
-    print("=== Archievement Tracker System ===")
+    print("=== Achievement Tracker System ===")
     print("")
-    for name in players:
-        archievements = players[name]
-        print(f"Player {name} archievements: {archievements}")
+    for name, arch in players.items():
+        print(f"Player {name} achievements: {arch}")
     print("")
 
-    print("=== Archievements Analytics ===")
-    print(f"All unique archievements: {all_possible}")
-    print(f"Total unique archievements: {len(all_possible)}")
+    print("=== Achievements Analytics ===")
+    all_unique: set[str] = all_achievements(players)
+    print(f"All unique achievements: {all_unique}")
+    print(f"Total unique achievements: {len(all_unique)}")
     print("")
-
-    common: set[str] = common_archievements(players)
-    print(f"Common to all players: {common}")
-
-    rare: str[str] = rare_archievements(players)
-    print(f"Rare archievements (1 players): {rare}")
+    print(f"Common to all players: {common_achievements(players)}")
+    print(f"Rare achievements (1 players): {rare_achievements(players)}")
     print("")
 
     p1: str = ""
     p2: str = ""
-    count: int = 0
-    for name in players:
-        if count == 0:
-            p1 = name
-        elif count == 1:
-            p2 = name
-        count += 1
+    if len(players) >= 2:
+        p1, p2, *_ = players.keys()
 
     if p1 and p2:
         common_pair: set[str] = players[p1].intersection(players[p2])

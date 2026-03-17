@@ -7,7 +7,7 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/10 19:33:39 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/10 20:26:20 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/03/17 19:12:09 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -15,7 +15,11 @@ import sys
 
 
 def check_argument() -> None:
-    """x"""
+    """
+    Parses and prints command-line arguments.
+    Displays the program name and lists any provided arguments with their
+    respective indices, or notifies if none were found.
+    """
     count: int = len(sys.argv)
     print("=== Command Quest ===")
     if count == 1:

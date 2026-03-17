@@ -7,7 +7,7 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/16 12:38:08 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/16 12:38:09 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/03/17 19:08:59 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -19,12 +19,6 @@ import math
 def parseo_coordinate(data: str) -> tuple[int, int, int] | None:
     """
     Parses a comma-separated string into a 3D coordinate tuple.
-
-    Args:
-        data (str): A string containing three integers separated by commas.
-
-    Returns:
-        tuple[int, int, int] | None: The parsed coordinates or None if invalid.
     """
     try:
         parts: list[str] = data.split(',')
@@ -49,10 +43,6 @@ def distance_coords(
 ) -> None:
     """
     Calculates and prints the Euclidean distance between two 3D points.
-
-    Args:
-        p1 (tuple[int, int, int]): Target point.
-        p2 (tuple[int, int, int]): Origin point, defaults to (0, 0, 0).
     """
     if p1:
         dist: float = math.sqrt(

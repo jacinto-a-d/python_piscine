@@ -7,7 +7,7 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/16 12:38:28 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/16 12:38:29 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/03/17 19:04:30 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,7 +16,11 @@ import sys
 
 
 def parseo_arguments(args: list[str]) -> dict[str, int]:
-    """x"""
+    """
+    Parses command-line arguments into a dictionary
+    of item names and quantities.
+    Expected format for each argument string: "item_name:quantity".
+    """
     data: dict[str, int] = {}
     for arg in args[1:]:
         try:
@@ -28,7 +32,12 @@ def parseo_arguments(args: list[str]) -> dict[str, int]:
 
 
 def analytics_inventory(inventory: dict[str, dict[str, int]]) -> None:
-    """x"""
+    """
+    Calculates and prints general inventory statistics.
+
+    Displays the total number of items, unique types, and the percentage
+    weight of each item relative to the total stock.
+    """
     total_items: int = 0
     qty: int = 0
     for data in inventory.values():
@@ -50,7 +59,10 @@ def analytics_inventory(inventory: dict[str, dict[str, int]]) -> None:
 
 
 def max_and_min_items(inventory: dict[str, dict[str, int]]) -> None:
-    """x"""
+    """
+    Identifies and prints the most and least abundant
+    items in the inventory.
+    """
 
     most_abundant: str = ""
     least_abundant: str = ""
@@ -83,7 +95,12 @@ def max_and_min_items(inventory: dict[str, dict[str, int]]) -> None:
 
 
 def categorice_and_restock(inventory: dict[str, dict[str, int]]) -> None:
-    """x"""
+    """
+    Categorizes items by stock level and
+    identifies those needing immediate restock.
+    Items are grouped into 'Moderate' (>= 5) or 'Scarce' (< 5).
+    Suggests restocking for items with exactly 1 unit left.
+    """
 
     categories: dict[str, dict[str, int]] = {
         "Moderate": {},
@@ -117,7 +134,9 @@ def categorice_and_restock(inventory: dict[str, dict[str, int]]) -> None:
 
 
 def dictionary_properties(inventory: dict[str, dict[str, int]]) -> None:
-    """x"""
+    """
+    Demonstrates basic dictionary iteration by listing all keys and values.
+    """
 
     first_name: bool = True
     all_name: str = ""
@@ -140,7 +159,10 @@ def dictionary_properties(inventory: dict[str, dict[str, int]]) -> None:
 
 
 def main() -> None:
-    """x"""
+    """
+    Initializes the inventory system, processes user input, and triggers
+    all analytical and management reports.
+    """
     inventory: dict[str, dict[str, int]] = {
         "potion": {"Name": "health potion", "type": "Consumable",
                    "quantity": 0, "value": 10},

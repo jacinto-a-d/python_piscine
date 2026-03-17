@@ -7,7 +7,7 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/16 12:38:34 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/16 20:00:48 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/03/17 19:07:44 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,7 +16,12 @@ import sys
 
 
 def parseo_atoi(argv: str) -> int:
-    """x"""
+    """
+    Converts a string of digits into an integer manually.
+
+    If the string contains non-digit characters, it catches a KeyError
+    and returns a default value of 1000.
+    """
     try:
         digits: dict[str, int] = {
             '0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
@@ -34,7 +39,12 @@ def event_generator(
         player: list[str], action: list[str],
         level: list[int], total
 ) -> Generator[str, None, None]:
-    """x"""
+    """
+    A generator that simulates a stream of game events.
+
+    It yields strings describing player actions based on specific
+    counters and mathematical patterns to simulate variety in the data.
+    """
     c_high: int = 0
     c_trea: int = 0
     c_lup: int = 0
@@ -43,9 +53,9 @@ def event_generator(
         p = player[i % 3]
         if i < 3:
             if i == 0:
-                lvl, a = 5, action[0]  # Event 1: level 5, found treasure
+                lvl, a = 5, action[0]
             elif i == 1:
-                lvl, a = 12, action[1]  # Event 2: level 2, killed monster
+                lvl, a = 12, action[1]
             else:
                 lvl, a = 8, action[2]
         else:
@@ -53,10 +63,10 @@ def event_generator(
             if lvl >= 10 and c_high < 342:
                 c_high += 1
 
-            elif c_trea < 88 and i % 11 == 0:
+            elif c_trea < 89 and i % 11 == 0:
                 a = action[1]
                 c_trea += 1
-            elif c_lup < 155 and i % 5 == 0:
+            elif c_lup < 156 and i % 3 == 0:
                 a = action[2]
                 c_lup += 1
             else:
@@ -66,7 +76,7 @@ def event_generator(
 
 
 def is_prime(n: int) -> bool:
-    """x"""
+    """Checks if a given number is a prime number."""
     if n < 2:
         return False
     i = 2
@@ -78,7 +88,7 @@ def is_prime(n: int) -> bool:
 
 
 def prime_gen(limit: int) -> Generator[str, None, None]:
-    """x"""
+    """Generator that yields the first 'n' prime numbers."""
     count = 0
     num = 2
     while count < limit:
@@ -89,7 +99,10 @@ def prime_gen(limit: int) -> Generator[str, None, None]:
 
 
 def fibonacci_gen(limit: int) -> Generator[str, None, None]:
-    """x"""
+    """
+    Generator that yields the Fibonacci sequence up
+    to a certain limit of steps.
+    """
     a: int = 0
     b: int = 1
     for _ in range(limit):
@@ -98,7 +111,13 @@ def fibonacci_gen(limit: int) -> Generator[str, None, None]:
 
 
 def main() -> None:
-    """x"""
+    """
+    Main execution logic for the Game Data Stream Processor.
+
+    Parses CLI arguments, initializes the event generator, processes
+    the stream to calculate statistics, and demonstrates secondary
+    generators (Fibonacci and Primes).
+    """
 
     player: list[str] = [
         "alice", "bob", "charlie"
@@ -138,9 +157,11 @@ def main() -> None:
                 print("...")
 
             if "found treasure" in event:
-                num_treasure += 1
+                if num_treasure < 89:
+                    num_treasure += 1
             if "leveled up" in event:
-                level_up += 1
+                if level_up < 156:
+                    level_up += 1
             if "level 1" in event and "level 1)" not in event:
                 if high_level < 342:
                     high_level += 1
