@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   ft_ancient_text.py                                   :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/10 17:35:15 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/12 11:26:54 by dipekko            ###   ########.fr      #
+#   Updated: 2026/03/18 12:47:37 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
