@@ -2,12 +2,12 @@
 # ########################################################################### #
 #   shebang: 1                                                                #
 #                                                          :::      ::::::::  #
-#   data_stream.py                                       :+:      :+:    :+:  #
+#   data_pipeline.py                                     :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/24 15:35:35 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/07 19:58:50 by jabad-di           ###   ########.fr      #
+#   Created: 2026/04/07 19:44:08 by jabad-di            #+#    #+#            #
+#   Updated: 2026/04/07 19:49:57 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -30,6 +30,10 @@ class DataProcessor(ABC):
     @abstractmethod
     def ingest(self, data: Any) -> None:
         pass
+
+    @property
+    def processor_name(self) -> str:
+        return type(self).__name__
 
     def output(self) -> tuple[int, str]:
         if not self._dataprocessor:
@@ -158,65 +162,3 @@ class DataStream():
             r: int = len(proc._dataprocessor)
             print(f"{proc.name}: total {t} items processed, "
                   f"remaining {r} on processor")
-
-
-def main() -> None:
-
-    ds: DataStream = DataStream()
-
-    streams: list[Union[
-        str,
-        list[float],
-        list[dict[str, str]],
-        int,
-        list[str]
-    ]]
-
-    streams = [
-        'Hello world',
-        [3.14, -1, 2.71],
-        [{'log_level': 'WARNING',
-          'log_message': 'Telnet access! Use ssh instead'},
-         {'log_level': 'INFO', 'log_message': 'User wil is connected'}],
-        42,
-        ['Hi', 'five']
-    ]
-
-    np: NumericProcessor = NumericProcessor()
-    tp: TextProcessor = TextProcessor()
-    lp: LogProcessor = LogProcessor()
-
-    print("=== Code Nexus - Data Stream ===\n")
-    print("Initializa Data Stream...")
-
-    ds.print_processors_stats()
-    print("")
-    print("Registering Numeric Processor\n")
-    print(f"Send first batch of data on stream: {streams}")
-    ds.register_processor(np)
-    ds.process_stream(streams)
-    ds.print_processors_stats()
-    print("")
-
-    print("Registering other data processors")
-    print("Send the same batch again")
-    ds.register_processor(tp)
-    ds.register_processor(lp)
-    ds.process_stream(streams)
-    ds.print_processors_stats()
-    print("")
-
-    print("Consume some elements from the data"
-          "processors: Numeric 3, Text 2, Log 1")
-    for _ in range(3):
-        np.output()
-    for _ in range(2):
-        tp.output()
-    for _ in range(1):
-        lp.output()
-
-    ds.print_processors_stats()
-
-
-if __name__ == "__main__":
-    main()

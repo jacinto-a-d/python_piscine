@@ -2,14 +2,15 @@
 # ########################################################################### #
 #   shebang: 1                                                                #
 #                                                          :::      ::::::::  #
-#   data_stream.py                                       :+:      :+:    :+:  #
+#   data_processor.py                                    :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/24 15:35:35 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/07 19:58:50 by jabad-di           ###   ########.fr      #
+#   Created: 2026/04/07 16:32:09 by jabad-di            #+#    #+#            #
+#   Updated: 2026/04/07 19:34:43 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
 
 from typing import Any, Dict, List, Union
 from abc import ABC, abstractmethod
@@ -17,10 +18,8 @@ from abc import ABC, abstractmethod
 
 class DataProcessor(ABC):
 
-    def __init__(self, name: str) -> None:
+    def __init__(self) -> None:
         self._dataprocessor: list[tuple[int, str]] = []
-        self._total_processed: int = 0
-        self.name: str = name
         self._rank: int = 0
 
     @abstractmethod
@@ -39,9 +38,6 @@ class DataProcessor(ABC):
 
 
 class NumericProcessor(DataProcessor):
-
-    def __init__(self) -> None:
-        super().__init__(name="Numeric Processor")
 
     def validate(self, data: Any) -> bool:
 
@@ -63,13 +59,9 @@ class NumericProcessor(DataProcessor):
         for n in items:
             self._dataprocessor.append((self._rank, str(n)))
             self._rank += 1
-            self._total_processed += 1
 
 
 class TextProcessor(DataProcessor):
-
-    def __init__(self) -> None:
-        super().__init__(name="Text Processor")
 
     def validate(self, data: Any) -> bool:
 
@@ -89,13 +81,9 @@ class TextProcessor(DataProcessor):
         for s in items:
             self._dataprocessor.append((self._rank, s))
             self._rank += 1
-            self._total_processed += 1
 
 
 class LogProcessor(DataProcessor):
-
-    def __init__(self) -> None:
-        super().__init__(name="Log Processor")
 
     def validate(self, data: Any) -> bool:
 
@@ -119,103 +107,82 @@ class LogProcessor(DataProcessor):
             log_formatted: str = f"{lvl}: {msg}"
             self._dataprocessor.append((self._rank, log_formatted))
             self._rank += 1
-            self._total_processed += 1
-
-
-class DataStream():
-
-    def __init__(self) -> None:
-        self._processors: list[DataProcessor] = []
-
-    def register_processor(self, proc: DataProcessor) -> None:
-        """x"""
-        self._processors.append(proc)
-
-    def process_stream(self, stream: list[Any]) -> None:
-        """x"""
-        for element in stream:
-            check: bool = False
-
-            for proc in self._processors:
-                if proc.validate(element):
-                    proc.ingest(element)
-                    check = True
-                    break
-
-            if not check:
-                print(f"DataStream error -"
-                      f"Can't process element in stream: {element}")
-
-    def print_processors_stats(self) -> None:
-
-        print("== DataStream statistics ==")
-        if not self._processors:
-            print("No processor found, no data")
-            return
-
-        for proc in self._processors:
-            t: int = proc._total_processed
-            r: int = len(proc._dataprocessor)
-            print(f"{proc.name}: total {t} items processed, "
-                  f"remaining {r} on processor")
 
 
 def main() -> None:
 
-    ds: DataStream = DataStream()
+    np: NumericProcessor = NumericProcessor()
+    test1: int = 42
+    test2: str = "Hello"
+    test3: str = "foo"
+    test4: List[int] = [1, 2, 3, 4, 5]
 
-    streams: list[Union[
-        str,
-        list[float],
-        list[dict[str, str]],
-        int,
-        list[str]
-    ]]
+    print("=== Code Nexus - Data Processor ===\n")
+    print("Testing Numeric Processor...")
 
-    streams = [
-        'Hello world',
-        [3.14, -1, 2.71],
-        [{'log_level': 'WARNING',
-          'log_message': 'Telnet access! Use ssh instead'},
-         {'log_level': 'INFO', 'log_message': 'User wil is connected'}],
-        42,
-        ['Hi', 'five']
+    print(f"Trying to validate input '{test1}': {np.validate(test1)}")
+    print(f"Trying to validate input '{test2}': {np.validate(test2)}")
+
+    print(f"Test invalid ingestion of string '{test3}'"
+          f"without prior validation:")
+    try:
+        np.ingest(test3)
+    except ValueError as e:
+        print(f"Got exception: {e}")
+
+    print(f"Processing data: {test4}")
+    np.ingest(test4)
+    extract_element_np: int = 3
+
+    print(f"Extracting {extract_element_np} values...")
+    for _ in range(0, extract_element_np):
+        rank, value = np.output()
+        print(f"Numeric value {rank}: {value}")
+
+    print("")
+
+    tp: TextProcessor = TextProcessor()
+    test5: List[str] = ['Hello', 'Nexus', 'World']
+    extract_element_tp: int = 1
+    print("Testing Text Processor...")
+    print(f"Trying to validate input '{test1}: {tp.validate(test1)}'")
+
+    try:
+        tp.ingest(test5)
+    except ValueError as e:
+        print(f"Got exception: {e}")
+
+    print(f"Processing data: {test5}")
+    print(f"Extracting {extract_element_tp} value...")
+
+    for _ in range(0, extract_element_tp):
+        rank, value = tp.output()
+        print(f"Text value {rank}: {value}")
+
+    print("")
+
+    lp: LogProcessor = LogProcessor()
+    test6: List[Dict[str, str]] = [
+        {'log_level': 'NOTICE', 'log_message': 'Connection to server'},
+        {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}
     ]
 
-    np: NumericProcessor = NumericProcessor()
-    tp: TextProcessor = TextProcessor()
-    lp: LogProcessor = LogProcessor()
+    print("Testing Log Processor...")
+    print(f"Trying to validate input '{test2}': {lp.validate(test2)}")
+    print(f"Processing data: {test6}")
 
-    print("=== Code Nexus - Data Stream ===\n")
-    print("Initializa Data Stream...")
+    try:
+        lp.ingest(test6)
+    except ValueError as e:
+        print(f"Got exception: {e}")
+    extract_element_lp: int = 2
+    print(f"Extracting {extract_element_lp} values...")
 
-    ds.print_processors_stats()
+    for _ in range(extract_element_lp):
+        rank, value = lp.output()
+        print(f"Log entry {rank}: {value}")
+
     print("")
-    print("Registering Numeric Processor\n")
-    print(f"Send first batch of data on stream: {streams}")
-    ds.register_processor(np)
-    ds.process_stream(streams)
-    ds.print_processors_stats()
-    print("")
-
-    print("Registering other data processors")
-    print("Send the same batch again")
-    ds.register_processor(tp)
-    ds.register_processor(lp)
-    ds.process_stream(streams)
-    ds.print_processors_stats()
-    print("")
-
-    print("Consume some elements from the data"
-          "processors: Numeric 3, Text 2, Log 1")
-    for _ in range(3):
-        np.output()
-    for _ in range(2):
-        tp.output()
-    for _ in range(1):
-        lp.output()
-
-    ds.print_processors_stats()
 
 
 if __name__ == "__main__":
