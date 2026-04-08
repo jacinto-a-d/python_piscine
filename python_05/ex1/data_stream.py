@@ -7,7 +7,7 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/24 15:35:35 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/07 19:58:50 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/08 13:17:51 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -128,11 +128,11 @@ class DataStream():
         self._processors: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:
-        """x"""
+
         self._processors.append(proc)
 
     def process_stream(self, stream: list[Any]) -> None:
-        """x"""
+
         for element in stream:
             check: bool = False
 
