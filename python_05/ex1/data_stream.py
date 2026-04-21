@@ -7,7 +7,7 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/24 15:35:35 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/08 13:17:51 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/21 15:06:53 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -100,7 +100,10 @@ class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
 
         if isinstance(data, Dict):
-            return 'log_level' in data and 'log_message' in data
+            lvl_ok = isinstance(data.get("log_level"), str)
+            msg_ok = isinstance(data.get("log_message"), str)
+            return lvl_ok and msg_ok
+
         if isinstance(data, List):
             return all(self.validate(item) for item in data)
         return False

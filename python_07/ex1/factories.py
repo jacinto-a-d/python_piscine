@@ -2,15 +2,21 @@
 # ########################################################################### #
 #   shebang: 1                                                                #
 #                                                          :::      ::::::::  #
-#   __init__.py                                          :+:      :+:    :+:  #
+#   factories.py                                         :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/04/20 21:57:18 by dipekko             #+#    #+#            #
-#   Updated: 2026/04/21 13:32:35 by jabad-di           ###   ########.fr      #
+#   Created: 2026/04/21 15:28:51 by jabad-di            #+#    #+#            #
+#   Updated: 2026/04/21 15:47:52 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-from .creature import FlameFactory, AquaFactory, CreatureFactory
+from ex0.creature import CreatureFactory
 
-__all__ = ["FlameFactory", "AquaFactory", "CreatureFactory"]
+
+class HealingCreatureFactory(CreatureFactory):
+    pass
+
+
+class TransformCreatureFactory(CreatureFactory):
+    pass

@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   data_processor.py                                    :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/07 16:32:09 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/13 13:16:55 by dipekko            ###   ########.fr      #
+#   Updated: 2026/04/21 15:06:25 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -88,7 +88,10 @@ class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
 
         if isinstance(data, Dict):
-            return 'log_level' in data and 'log_message' in data
+            lvl_ok = isinstance(data.get("log_level"), str)
+            msg_ok = isinstance(data.get("log_message"), str)
+            return lvl_ok and msg_ok
+
         if isinstance(data, List):
             return all(self.validate(item) for item in data)
         return False
@@ -163,14 +166,13 @@ def main() -> None:
 
     lp: LogProcessor = LogProcessor()
     test6: List[Dict[str, str]] = [
-        {'log_level': 'NOTICE', 'log_message': 'Connection to server'},
-        {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}
+        {"log_level": "NOTICE", "log_message": "Connection to server"},
+        {"log_level": "ERROR", "log_message": "Unauthorized access!!"}
     ]
 
     print("Testing Log Processor...")
     print(f"Trying to validate input '{test2}': {lp.validate(test2)}")
     print(f"Processing data: {test6}")
-
     try:
         lp.ingest(test6)
     except ValueError as e:
@@ -179,10 +181,11 @@ def main() -> None:
     print(f"Extracting {extract_element_lp} values...")
 
     for _ in range(extract_element_lp):
-        rank, value = lp.output()
-        print(f"Log entry {rank}: {value}")
-
-    print("")
+        try:
+            rank, value = lp.output()
+            print(f"Log entry {rank}: {value}")
+        except IndexError:
+            print("Error: Invalid entry")
 
 
 if __name__ == "__main__":

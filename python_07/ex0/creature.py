@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   creature.py                                          :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/20 22:03:20 by dipekko             #+#    #+#            #
-#   Updated: 2026/04/20 22:21:30 by dipekko            ###   ########.fr      #
+#   Updated: 2026/04/21 13:21:31 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -15,51 +15,66 @@ from abc import ABC, abstractmethod
 
 
 class Creature(ABC):
-
-    def __init__(self, name: str, type: str) -> None:
+    def __init__(self, name: str, creature_type: str) -> None:
         self.name: str = name
-        self.type: str = type
+        self.creature_type: str = creature_type
 
-    def descibe(self) -> None:
-        pass
+    def describe(self) -> str:
+        return f"{self.name} is a {self.creature_type} type Creature"
 
     @abstractmethod
-    def attack(self) -> None:
+    def attack(self) -> str:
         pass
 
 
 class Flameling(Creature):
-    pass
+    def attack(self) -> str:
+        attack_1: str = "Ember"
+        return f"{self.name} uses {attack_1}!"
 
 
 class Pyrodon(Creature):
-    pass
+    def attack(self) -> str:
+        attack_1: str = "Flamethrower"
+        return f"{self.name} uses {attack_1}!"
 
 
 class Aquabub(Creature):
-    pass
+    def attack(self) -> str:
+        attack_1: str = "Water Gun"
+        return f"{self.name} uses {attack_1}!"
 
 
 class Torragon(Creature):
-    pass
+    def attack(self) -> str:
+        attack_1: str = "Hydro Pump"
+        return f"{self.name} uses {attack_1}!"
 
 
 class CreatureFactory(ABC):
-
     def __init__(self) -> None:
         pass
 
     @abstractmethod
-    def Create_base(self) -> None:
+    def create_base(self) -> Creature:
         pass
 
-    def create_evolved(self) -> None:
+    @abstractmethod
+    def create_evolved(self) -> Creature:
         pass
 
 
 class FlameFactory(CreatureFactory):
-    pass
+    def create_base(self) -> Creature:
+        return Flameling("Flameling", "Fire")
+
+    def create_evolved(self) -> Creature:
+        return Pyrodon("Pyrodon", "Fire/Flying")
 
 
 class AquaFactory(CreatureFactory):
-    pass
+    def create_base(self) -> Creature:
+        return Aquabub("Aquabub", "Water")
+
+    def create_evolved(self) -> Creature:
+        return Torragon("Torragon", "Water")

@@ -2,15 +2,32 @@
 # ########################################################################### #
 #   shebang: 1                                                                #
 #                                                          :::      ::::::::  #
-#   __init__.py                                          :+:      :+:    :+:  #
+#   creature_capability.py                               :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/04/20 21:57:18 by dipekko             #+#    #+#            #
-#   Updated: 2026/04/21 13:32:35 by jabad-di           ###   ########.fr      #
+#   Created: 2026/04/21 15:16:17 by jabad-di            #+#    #+#            #
+#   Updated: 2026/04/21 15:24:13 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-from .creature import FlameFactory, AquaFactory, CreatureFactory
+from abc import ABC, abstractmethod
 
-__all__ = ["FlameFactory", "AquaFactory", "CreatureFactory"]
+
+class HealCapability(ABC):
+    @abstractmethod
+    def heal(target: str) -> str:
+        pass
+
+
+class TransformCapability(ABC):
+    def __init__(self) -> None:
+        pass
+
+    @abstractmethod
+    def transform(self) -> str:
+        pass
+
+    @abstractmethod
+    def revert(self) -> str:
+        pass
