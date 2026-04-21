@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # ########################################################################### #
-#                                                                             #
+#   shebang: 1                                                                #
 #                                                          :::      ::::::::  #
 #   ft_specialized_plants.py                             :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
+#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/04 13:45:25 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/10 15:06:55 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/13 14:19:30 by dipekko            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -78,7 +78,7 @@ def main() -> None:
         print(
             f"{f.name} (Flower): {f.height}cm, "
             f"{f.age} days, {f.color}"
-            )
+        )
         f.bloom()
     print("")
 
@@ -89,7 +89,7 @@ def main() -> None:
         print(
             f"{t.name} (Tree): {t.height}cm, "
             f"{t.age} days, {t.climbable} diameter"
-            )
+        )
         t.produce_shade()
 
     print("")
@@ -100,7 +100,7 @@ def main() -> None:
         print(
             f"{v.name} (Vegetable): {v.height}cm, "
             f"{v.age} days, {v.harvest} harvest"
-            )
+        )
         v.nutrient()
 
 

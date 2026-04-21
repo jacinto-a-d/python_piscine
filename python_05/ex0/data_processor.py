@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   data_processor.py                                    :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
+#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/07 16:32:09 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/07 19:34:43 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/13 13:16:55 by dipekko            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 

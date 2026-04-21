@@ -4,16 +4,15 @@
 #                                                          :::      ::::::::  #
 #   data_pipeline.py                                     :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
+#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/07 19:44:08 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/08 19:42:28 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/13 14:15:21 by dipekko            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-from typing import Any, Dict, List, Union, Protocol, Optional
+from typing import Any, Dict, List, Union, Protocol
 from abc import ABC, abstractmethod
-
 
 
 class DataProcessor(ABC):
@@ -32,21 +31,16 @@ class DataProcessor(ABC):
     def ingest(self, data: Any) -> None:
         pass
 
-    @property
-    def processor_name(self) -> str:
-        return type(self).__name__
-
     def output(self) -> tuple[int, str]:
         if not self._dataprocessor:
-            raise IndexError("Error")
-        element: tuple[int, str] = self._dataprocessor.pop(0)
-        return element
+            raise IndexError("No data to output")
+        return self._dataprocessor.pop(0)
 
 
 class NumericProcessor(DataProcessor):
 
     def __init__(self) -> None:
-        super().__init__(name="Numeric Processor")
+        super().__init__("Numeric Processor")
 
     def validate(self, data: Any) -> bool:
 
@@ -65,8 +59,8 @@ class NumericProcessor(DataProcessor):
         items: List[Union[int, float]]
         items = data if isinstance(data, list) else [data]
 
-        for n in items:
-            self._dataprocessor.append((self._rank, str(n)))
+        for item in items:
+            self._dataprocessor.append((self._rank, str(item)))
             self._rank += 1
             self._total_processed += 1
 
@@ -91,8 +85,8 @@ class TextProcessor(DataProcessor):
 
         items: List[str] = data if isinstance(data, list) else [data]
 
-        for s in items:
-            self._dataprocessor.append((self._rank, s))
+        for item in items:
+            self._dataprocessor.append((self._rank, item))
             self._rank += 1
             self._total_processed += 1
 
@@ -127,7 +121,36 @@ class LogProcessor(DataProcessor):
             self._total_processed += 1
 
 
-class DataStream():
+class ExportPlugin(Protocol):
+    """es la clase que contiene protocol, y que definira las etapas
+    que seran las clases idempendientes que contenga el mismo metodo"""
+
+    def process_output(self, data: List[tuple[int, str]]) -> None:
+        ...
+
+
+class CSVExport:
+    """clase hija (Adaptadores) filtro de entrada"""
+    def process_output(self, data: List[tuple[int, str]]) -> None:
+        if not data:
+            return
+
+        print("CSV Output:")
+        print(",".join([item[1] for item in data]))
+
+
+class JSONExport:
+    """clase hija (Adaptadores) filtro de entradas"""
+    def process_output(self, data: List[tuple[int, str]]) -> None:
+        if not data:
+            return
+
+        print("JSON Output:")
+        items = [f'"item_{i}": "{val}"' for i, val in data]
+        print("{" + ", ".join(items) + "}")
+
+
+class DataStream:
 
     def __init__(self) -> None:
         self._processors: list[DataProcessor] = []
@@ -164,248 +187,68 @@ class DataStream():
             print(f"{proc.name}: total {t} items processed, "
                   f"remaining {r} on processor")
 
-
-class ProcessingStage(Protocol):
-    """es la clase que contiene protocol, y que definira las etapas
-    que seran las clases idempendientes que contenga el mismo metodo"""
-
-    def process(self, data: Any) -> Any:
-        ...
-
-
-class InputStage:
-    """(ETAPA) -> limpia o valida que los datos sean correctos"""
-    def process(self, data: Any) -> Any:
-
-        if isinstance(data, dict):
-            check_key: List[str] = ["sensor", "value", "unit"]
-
-            if not all(key in data for key in check_key):
-                raise ValueError("Invalid JSON: Missing required sensor fields")
-            return data
-
-        elif isinstance(data, str):
-            if "stream" in data.lower():
-                return data
-
-            if not data or len(data.split(',')) < 2:
-                raise ValueError("Invalid CSV: Data is empty or malformed")
-            return data
-
-        return data
-
-
-class TransformStage:
-    """(ETAPA) -> cambia los datos (convierte unidades o incluye data)"""
-    def process(self, data: Any) -> Any:
-        if isinstance(data, dict) and "value" in data:
-            try:
-                data["value"] = float(data["value"])
-            except ValueError:
-                data["value"] = 0.0
-        if isinstance(data, str) and "stream" in data.lower():
-            return {"type": "stream_summary", "count": 5, "avg": 22.1}
-        
-        return data
-
-
-class OutputStage:
-    """(ETAPA) -> convierte el resultado final en algo legible"""
-    def process(self, data: Any) -> Any:
-
-        if isinstance(data, dict) and data.get("type") == "stream_summary":
-            return f"Stream summary: {data['count']} readings, avg: {data['avg']}°C"
-
-        if isinstance(data, dict) and "value" in data:
-            val: str = data.get("value")
-            unit: str = data.get("unit", "C")
-            return f"Processed temperature reading: {val}°{unit} (Normal range)"
-
-        elif isinstance(data, str):
-            count: int = 0
-            count = 1 if len(data.split(',')) > 0 else 0
-            return f"User activity logged: {count} actions processed"
-
-        return f"Result: {data}"
-
-
-class ProcessingPipeline(ABC):
-    """clase base abstacta que herada ABC"""
-    def __init__(self) -> None:
-        self.stages: List[ProcessingStage] = []
-
-    def add_stage(self, stage: ProcessingStage, description: Optional[str] = None) -> None:
-        self.stages.append(stage)
-        print(f"Stage {len(self.stages)}: {description} initialized")
-
-    def process(self, data: Any) -> Any:
-        result: Any = data
-        for stage in self.stages:
-            result = stage.process(result)
-        return result
-
-
-class JSONAdapter(ProcessingPipeline):
-    """clase hija (Adaptadores) filtro de entrada"""
-    def __init__(self, pipeline_id: str) -> None:
-        super().__init__()
-
-        self.pipeline_id = pipeline_id
-    
-    def process(self, data: Any) -> Any:
-
-        if not isinstance(data, dict):
-            return None
-
-        print(f"Input: {data}")
-        print("Transform: Enriched with metadata and validation")
-        return super().process(data)
-
-
-class CSVAdapter(ProcessingPipeline):
-    """clase hija (Adaptadores) filtro de entradas"""
-    def __init__(self, pipeline_id: str) -> None:
-        super().__init__()
-
-        self.pipeline_id = pipeline_id
-
-    def process(self, data: Any) -> Any:
-
-        if not isinstance(data, str) or ',' not in data:
-            return None
-
-        print(f"Input: {data}")
-        print("Transform: Parsed and structired data")
-        return super().process(data)
-
-
-class StreamAdapter(ProcessingPipeline):
-    """clase hija (Adaptadores) filtros de entrada"""
-    def __init__(self, pipeline_id: str) -> None:
-        super().__init__()
-        self.pipeline_id = pipeline_id
-
-    def process(self, data: Any) -> Any:
-
-        if not isinstance(data, str) or "stream" not in data.lower():
-            return None
-
-        print(f"Input: {data}")
-        print("Transform: Aggregated and filtered")
-        return super().process(data)
-
-
-class NexusManager:
-    """punto de inicio (Manager)"""
-    def __init__(self, capacity: int) -> None:
-        self.pipelines: List[ProcessingPipeline] = []
-        self.capacity = capacity
-
-        print("Initializing Nexus Manager...")
-        print(f"Pipeline capacity: {self.capacity} streams/second\n")
-        print("Creating Data Processing Pipeline...")
-
-    def add_pipeline(self, pipeline: ProcessingPipeline) -> None:
-        self.pipelines.append(pipeline)
-
-    def process_data(self, data: Any) -> None:
-        for pipe in self.pipelines:
-            results: str = pipe.process(data)
-            if results is not None:
-                print(f"Output: {results}")
-
-    def chaining(self, data: Any) -> None:
-
-        pipe_names: List[str] = [
-            type(p).__name__.replace('Adapter', '')for p in self.pipelines
-        ]
-        print(f"{'-> '.join(pipe_names)}")
-        print("Data flow: Raw -> Processed -> Analyzed -> Stored\n")
-
-        result_data: Any = data
-        for pipe in self.pipelines:
-            result_data = pipe.process(result_data)
-
-        record: int = 100
-        efficiency: int = 95
-        time: float = 0.2
-
-        print(f"Chain result: {record} records processed through "
-              f"{len(self.pipelines)}-stage pipeline")
-        print(f"Performance: {efficiency}% efficiency, "
-              f"{time}s total processing time")
-
-    def error_test(self, corrupt_data: Any) -> None:
-
-        print("Simulating pipeline failure...")
-
-        try:
-            if not corrupt_data:
-                raise ValueError("Invalid data format")
-        except ValueError as e:
-            print(f"Error detected in Stage 2: {e}")
-            print("Recovery initiated: Switching to backup processor")
-            print("Recovery successful: Pipeline restored, processing resumed\n")
-            print("Nexus Integration complete. All systems operational.")
+    def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
+        for proc in self._processors:
+            collected = []
+            for _ in range(nb):
+                try:
+                    collected.append(proc.output())
+                except IndexError:
+                    break
+            plugin.process_output(collected)
 
 
 def main() -> None:
     """x"""
 
-    print("=== CODE NEXUS - ENTERPRISE PIPELINE SYSTEM ===\n")
-
-    manager: NexusManager = NexusManager(1000)
-    pipe_json: JSONAdapter = JSONAdapter("NX-42")
-    pipe_csv: CSVAdapter = CSVAdapter("CSV-01")
-    pipe_stream: StreamAdapter = StreamAdapter("STR-99")
-
-    pipe_json.add_stage(InputStage(), "Input validation and parsing")
-    pipe_json.add_stage(TransformStage(), "Data transformation and enrichment")
-    pipe_json.add_stage(OutputStage(), "Output formatting and delivery")
-    manager.add_pipeline(pipe_json)
-
-    pipe_csv.add_stage(InputStage())
-    pipe_csv.add_stage(TransformStage())
-    pipe_csv.add_stage(OutputStage())
-    manager.add_pipeline(pipe_csv)
-
-    pipe_stream.add_stage(InputStage(), "Input validation and parsing")
-    pipe_stream.add_stage(TransformStage(), "Data transformation and enrichment")
-    pipe_stream.add_stage(OutputStage(), "Output formatting and delivery")
-    manager.add_pipeline(pipe_stream)
-
-    print("")
-    print("=== Multi-Format Data Processing ===")
+    print("=== Code Nexus - Data Pipeline ===\n")
+    print("Initialize Data Stream...\n")
+    ds = DataStream()
+    ds.print_processors_stats()
     print("")
 
-    json_data: dict[Union[str, float]] = {
-        "sensor": "temp", "value": "23.5", "unit": "C"
-    }
+    print("Registering Processors\n")
+    ds.register_processor(NumericProcessor())
+    ds.register_processor(TextProcessor())
+    ds.register_processor(LogProcessor())
 
-    csv_data: str = "user,action,timestamp"
+    batch1 = [
+        'Hello world',
+        [3.14, -1, 2.71],
+        [{'log_level': 'WARNING',
+          'log_message': 'Telnet access! Use ssh instead'},
+         {'log_level': 'INFO', 'log_message': 'User wil is connected'}],
+        42,
+        ['Hi', 'five']
+    ]
 
-    stream_data: str = "Real-time sensor stream"
-
-    error_data: str = None
-
-    print("Processing JSON data through pipeline...")
-    manager.process_data(json_data)
+    print(f"Send first batch of data on stream: {batch1}\n")
+    ds.process_stream(batch1)
+    ds.print_processors_stats()
     print("")
-    
-    print("Processing CSV data through same pipeline...")
-    manager.process_data(csv_data)
+    print("Send 3 processed data from each processor to a CSV plugin:")
+    ds.output_pipeline(3, CSVExport())
+    print("")
+    ds.print_processors_stats()
     print("")
 
-    print("Processing Stream data through same pipeline...")
-    manager.process_data(stream_data)
-    print("")
+    batch2 = [21, ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
+              [{'log_level': 'ERROR',
+                'log_message': '500 server crash'},
+               {'log_level': 'NOTICE',
+                'log_message': 'Certificate expires in 10 days'}],
+              [32, 42, 64, 84, 128, 168],
+              'World hello']
 
-    print("\n=== Pipeline Chaining Demo ===")
-    manager.chaining("Initial Raw Data")
+    print(f"Send another batch of data: {batch2}\n")
+    ds.process_stream(batch2)
+    ds.print_processors_stats()
     print("")
+    print("Send 5 processed data from each processor to a JSON plugin:")
+    ds.output_pipeline(5, JSONExport())
+    print("")
+    ds.print_processors_stats()
 
-    print("=== Error Recovery Test ===")
-    manager.error_test(error_data)
 
 if __name__ == "__main__":
     main()

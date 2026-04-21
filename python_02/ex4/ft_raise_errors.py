@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # ########################################################################### #
-#                                                                             #
+#   shebang: 1                                                                #
 #                                                          :::      ::::::::  #
 #   ft_raise_errors.py                                   :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
+#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/10 17:25:54 by jabad-di            #+#    #+#            #
-#   Updated: 2026/03/10 17:25:58 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/13 14:17:32 by dipekko            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,7 +16,7 @@ def check_plant_health(
         plant_name: str,
         water_level: int,
         sunlight_hours: int
-        ) -> str:
+) -> str:
     """Validates plant parameters and raises ValueError for invalid inputs."""
     if plant_name == "":
         raise ValueError("Plant name cannot be empty!")
