@@ -7,7 +7,7 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/21 15:28:51 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/22 16:51:14 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/22 17:59:31 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -18,7 +18,7 @@ from .creatures import Sproutling, Bloomelle, Shiftling, Morphagon
 class HealingCreatureFactory(CreatureFactory):
     def __init__(self) -> None:
         super().__init__()
-        self.name = "HealingCreatureFactory"
+        self.c_name = "Healing"
 
     def create_base(self) -> Creature:
         return Sproutling("Sproutling", "Grass")
@@ -30,7 +30,7 @@ class HealingCreatureFactory(CreatureFactory):
 class TransformCreatureFactory(CreatureFactory):
     def __init__(self) -> None:
         super().__init__()
-        self.name = "TransformCreatureFactory"
+        self.c_name = "Transform"
 
     def create_base(self) -> Creature:
         return Shiftling("Shiftling", "Normal")

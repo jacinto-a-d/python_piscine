@@ -7,7 +7,7 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/20 22:03:20 by dipekko             #+#    #+#            #
-#   Updated: 2026/04/22 16:44:42 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/22 19:26:08 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -52,6 +52,8 @@ class Torragon(Creature):
 
 
 class CreatureFactory(ABC):
+    c_name: str = ""
+
     def __init__(self) -> None:
         pass
 
@@ -65,6 +67,9 @@ class CreatureFactory(ABC):
 
 
 class FlameFactory(CreatureFactory):
+    def __init__(self) -> None:
+        self.c_name: str = "Flameling"
+
     def create_base(self) -> Creature:
         return Flameling("Flameling", "Fire")
 
@@ -73,6 +78,9 @@ class FlameFactory(CreatureFactory):
 
 
 class AquaFactory(CreatureFactory):
+    def __init__(self) -> None:
+        self.c_name: str = "Aquabub"
+
     def create_base(self) -> Creature:
         return Aquabub("Aquabub", "Water")
 
