@@ -2,12 +2,12 @@
 # ########################################################################### #
 #   shebang: 1                                                                #
 #                                                          :::      ::::::::  #
-#   creature_capability.py                               :+:      :+:    :+:  #
+#   capabilities.py                                      :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/21 15:16:17 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/21 15:24:13 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/22 13:21:47 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,13 +16,13 @@ from abc import ABC, abstractmethod
 
 class HealCapability(ABC):
     @abstractmethod
-    def heal(target: str) -> str:
+    def heal(self) -> str:
         pass
 
 
 class TransformCapability(ABC):
     def __init__(self) -> None:
-        pass
+        self.transformed: bool = False
 
     @abstractmethod
     def transform(self) -> str:

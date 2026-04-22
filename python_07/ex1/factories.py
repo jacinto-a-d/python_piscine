@@ -7,16 +7,33 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/21 15:28:51 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/21 15:47:52 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/22 16:51:14 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-from ex0.creature import CreatureFactory
+from ex0.creature import CreatureFactory, Creature
+from .creatures import Sproutling, Bloomelle, Shiftling, Morphagon
 
 
 class HealingCreatureFactory(CreatureFactory):
-    pass
+    def __init__(self) -> None:
+        super().__init__()
+        self.name = "HealingCreatureFactory"
+
+    def create_base(self) -> Creature:
+        return Sproutling("Sproutling", "Grass")
+
+    def create_evolved(self) -> Creature:
+        return Bloomelle("Bloomelle", "Grass/Fairy")
 
 
 class TransformCreatureFactory(CreatureFactory):
-    pass
+    def __init__(self) -> None:
+        super().__init__()
+        self.name = "TransformCreatureFactory"
+
+    def create_base(self) -> Creature:
+        return Shiftling("Shiftling", "Normal")
+
+    def create_evolved(self) -> Creature:
+        return Morphagon("Morphagon", "Normal/Dragon")

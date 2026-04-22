@@ -6,12 +6,8 @@
 #                                                      +:+ +:+         +:+    #
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/04/21 15:14:46 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/22 13:03:50 by jabad-di           ###   ########.fr      #
+#   Created: 2026/04/22 13:34:49 by jabad-di            #+#    #+#            #
+#   Updated: 2026/04/22 13:34:50 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-from .factories import TransformCreatureFactory, HealingCreatureFactory
-
-
-__all__ = ["TransformCreatureFactory", "HealingCreatureFactory"]

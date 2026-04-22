@@ -7,7 +7,7 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/07 19:44:08 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/21 15:07:02 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/22 16:06:44 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -125,15 +125,11 @@ class LogProcessor(DataProcessor):
 
 
 class ExportPlugin(Protocol):
-    """es la clase que contiene protocol, y que definira las etapas
-    que seran las clases idempendientes que contenga el mismo metodo"""
-
     def process_output(self, data: List[tuple[int, str]]) -> None:
         ...
 
 
 class CSVExport:
-    """clase hija (Adaptadores) filtro de entrada"""
     def process_output(self, data: List[tuple[int, str]]) -> None:
         if not data:
             return
@@ -143,7 +139,6 @@ class CSVExport:
 
 
 class JSONExport:
-    """clase hija (Adaptadores) filtro de entradas"""
     def process_output(self, data: List[tuple[int, str]]) -> None:
         if not data:
             return
@@ -159,11 +154,9 @@ class DataStream:
         self._processors: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:
-        """x"""
         self._processors.append(proc)
 
     def process_stream(self, stream: list[Any]) -> None:
-        """x"""
         for element in stream:
             check: bool = False
 
@@ -202,7 +195,6 @@ class DataStream:
 
 
 def main() -> None:
-    """x"""
 
     print("=== Code Nexus - Data Pipeline ===\n")
     print("Initialize Data Stream...\n")
