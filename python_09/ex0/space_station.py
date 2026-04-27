@@ -4,10 +4,83 @@
 #                                                          :::      ::::::::  #
 #   space_station.py                                     :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/24 15:03:21 by dipekko             #+#    #+#            #
-#   Updated: 2026/04/24 15:03:22 by dipekko            ###   ########.fr      #
+#   Updated: 2026/04/27 19:44:12 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
+"""
+    Fiel argumentos especificos:
+            PARA NUMERO:
+            ge: mayor o igual que:
+            le: menor o igual que:
+            gt: estrictamente mayor que.
+            lt: estrictamente menor que.
+            PARA TEXTO
+            min_length: para el minimo
+            max_length: para el maximo
+"""
+
+
+from datetime import datetime
+from typing import Optional
+from pydantic import BaseModel, Field, ValidationError
+
+
+class SpaceStation(BaseModel):
+    station_id: str = Field(min_length=3, max_length=10)
+    name: str = Field(min_length=1, max_length=50)
+    crew_size: int = Field(ge=1, le=20)
+    power_level: float = Field(ge=0.0, le=100.0)
+    oxygen_level: float = Field(ge=0.0, le=100.0)
+    last_maintenance: datetime
+    is_operational: bool = True
+    notes: Optional[str] = Field(None, max_length=200)
+
+
+def main() -> None:
+    print("Space Station Data Validation")
+    print("========================================")
+    try:
+        station: SpaceStation = SpaceStation(
+            station_id="ISS001",
+            name="International Space Station",
+            crew_size=6,
+            power_level=85.5,
+            oxygen_level=92.3,
+            last_maintenance=datetime.now(),
+            is_operational=True,
+            notes="Operational"
+        )
+        print("Valid station created:")
+        print(f"ID: {station.station_id}")
+        print(f"Name: {station.name}")
+        print(f"Crew: {station.crew_size} people")
+        print(f"Power: {station.power_level}%")
+        print(f"Oxigen: {station.oxygen_level}%")
+        print(f"status: {station.notes}")
+    except ValidationError as e:
+        print(f"Unexpected error creating valid station: {e}")
+
+    print("")
+    print("========================================")
+    print("Expected validation error:")
+    try:
+        invalid_station: SpaceStation = SpaceStation(
+            station_id="ISS001",
+            name="International Space Station",
+            crew_size=25,
+            power_level=85.5,
+            oxygen_level=92.3,
+            last_maintenance=datetime.now(),
+            is_operational=True,
+            notes="Operational"
+        )
+    except ValidationError as e:
+        print(e.error()[0])
+
+
+if __name__ == "__main__":
+    main()

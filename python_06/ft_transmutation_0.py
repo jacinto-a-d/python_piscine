@@ -2,22 +2,18 @@
 # ########################################################################### #
 #   shebang: 1                                                                #
 #                                                          :::      ::::::::  #
-#   ft_alembic_4.py                                      :+:      :+:    :+:  #
+#   ft_transmutation_0.py                                :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/04/13 14:43:35 by dipekko             #+#    #+#            #
-#   Updated: 2026/04/27 15:13:39 by jabad-di           ###   ########.fr      #
+#   Created: 2026/04/27 14:01:12 by jabad-di            #+#    #+#            #
+#   Updated: 2026/04/27 15:08:56 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-import alchemy
+from alchemy.transmutation.recipes import lead_to_gold
 
 if __name__ == "__main__":
-    print("=== Alembic 4 ===")
-    print("Accessing the alchemy module using 'import alchemy'")
-    print(f"Testing create_air: {alchemy.create_air()}")
-    print("Now show that not all functions can be reache")
-    print("This will raise an exception!")
-    print("Testing the hidden create_earth: ", end="")
-    print(alchemy.create_earth())  # type: ignore
+    print("=== Transmutation 0 ===")
+    print("Using file alchemy/transmutation/recipes.py directly")
+    print(f"Testing lead to gold: {lead_to_gold()}")

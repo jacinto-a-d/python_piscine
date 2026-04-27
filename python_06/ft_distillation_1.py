@@ -2,22 +2,19 @@
 # ########################################################################### #
 #   shebang: 1                                                                #
 #                                                          :::      ::::::::  #
-#   ft_alembic_4.py                                      :+:      :+:    :+:  #
+#   ft_distillation_1.py                                 :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/04/13 14:43:35 by dipekko             #+#    #+#            #
-#   Updated: 2026/04/27 15:13:39 by jabad-di           ###   ########.fr      #
+#   Created: 2026/04/27 14:00:06 by jabad-di            #+#    #+#            #
+#   Updated: 2026/04/27 16:56:41 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 import alchemy
 
 if __name__ == "__main__":
-    print("=== Alembic 4 ===")
-    print("Accessing the alchemy module using 'import alchemy'")
-    print(f"Testing create_air: {alchemy.create_air()}")
-    print("Now show that not all functions can be reache")
-    print("This will raise an exception!")
-    print("Testing the hidden create_earth: ", end="")
-    print(alchemy.create_earth())  # type: ignore
+    print("=== Distillation 1 ===")
+    print("Using: 'import alchemy' structure to access potions")
+    print(f"Testing strength_potion: {alchemy.potions.strength_potion()}")
+    print(f"Testing heal alias: {alchemy.heal()}")

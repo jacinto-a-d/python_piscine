@@ -4,17 +4,16 @@
 #                                                          :::      ::::::::  #
 #   __init__.py                                          :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/13 14:34:16 by dipekko             #+#    #+#            #
-#   Updated: 2026/04/17 17:18:18 by dipekko            ###   ########.fr      #
+#   Updated: 2026/04/27 16:58:05 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
+from . import transmutation
 from .elements import create_air
-from .potions import healing_potion
+from .potions import strength_potion, healing_potion as heal
 
 
-__all__ = ['create_air']
-
-heal = healing_potion
+__all__ = ['create_air', 'heal', 'transmutation','strength_potion']
