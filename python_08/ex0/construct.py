@@ -4,16 +4,17 @@
 #                                                          :::      ::::::::  #
 #   construct.py                                         :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
+#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/22 19:39:44 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/22 20:17:00 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/23 15:34:42 by dipekko            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 import sys
 import os
 import site
+
 
 def is_venv() -> bool:
     """detecta si el script se ejecuta en un entorno virtual.
@@ -22,27 +23,28 @@ def is_venv() -> bool:
 
 
 def main() -> None:
-    in_construct: bool =  is_venv()
+    in_construct: bool = is_venv()
     python_path: str = sys.executable
 
     if not in_construct:
-        print("MATRIX STATUS: You're still plugged in")
-        print(f"Current Python: {python_path}")
+        print("\nMATRIX STATUS: You're still plugged in")
+        print(f"\nCurrent Python: {python_path}")
         print("Virtual Environment: None detected")
         print("\nWARNING: You're in the global environment!")
         print("The machines can see everything you install.")
-        print("Python3 -m venv matrix_env")
-        print("source matrix_env/bin/active   # On Unix")
+        print("\nTo enter the construct, run:")
+        print("python -m venv matrix_env")
+        print("source matrix_env/bin/activate   # On Unix")
         print(r"matrix_env\Scripts\activate   # On Windows")
         print("\nThen run this program again.")
     else:
         venv_name: str = os.path.basename(sys.prefix)
-        pkg_path: str = site.getsitespackages()[0]
+        pkg_path: str = site.getsitepackages()[0]
 
-        print("MATRIX STATUS: Welcome to the construct")
+        print("\nMATRIX STATUS: Welcome to the construct\n")
         print(f"Current Python: {python_path}")
         print(f"Virtual Environment: {venv_name}")
-        print(f"Environment path: {sys.prefix}")
+        print(f"Environment Path: {sys.prefix}")
         print("\nSUCCESS: You're in an isolated environment!")
         print("Safe to install packages without affecting")
         print("the global system.")

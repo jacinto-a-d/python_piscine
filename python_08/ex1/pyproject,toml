@@ -1,0 +1,16 @@
+
+[tool.poetry]
+name = "ex1"
+version = "0.1.0"
+description = "Loading Programs - Matrix Data Analysis"
+authors = ["dipekko <dipekko@student.42.fr>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "3.0.2"
+numpy = "2.4.4"
+matplotlib = "3.10.9"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
