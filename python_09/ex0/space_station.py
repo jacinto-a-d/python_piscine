@@ -7,22 +7,9 @@
 #   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/24 15:03:21 by dipekko             #+#    #+#            #
-#   Updated: 2026/04/27 19:44:12 by jabad-di           ###   ########.fr      #
+#   Updated: 2026/04/28 13:57:07 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
-
-"""
-    Fiel argumentos especificos:
-            PARA NUMERO:
-            ge: mayor o igual que:
-            le: menor o igual que:
-            gt: estrictamente mayor que.
-            lt: estrictamente menor que.
-            PARA TEXTO
-            min_length: para el minimo
-            max_length: para el maximo
-"""
-
 
 from datetime import datetime
 from typing import Optional
@@ -67,19 +54,22 @@ def main() -> None:
     print("")
     print("========================================")
     print("Expected validation error:")
+
     try:
         invalid_station: SpaceStation = SpaceStation(
             station_id="ISS001",
             name="International Space Station",
             crew_size=25,
-            power_level=85.5,
+            power_level=85,
             oxygen_level=92.3,
             last_maintenance=datetime.now(),
             is_operational=True,
             notes="Operational"
         )
+        print(invalid_station.crew_size)
     except ValidationError as e:
-        print(e.error()[0])
+        message: list[str] = [err['msg'] for err in e.errors()]
+        print(message[0])
 
 
 if __name__ == "__main__":
