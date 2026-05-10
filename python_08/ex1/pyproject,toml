@@ -3,7 +3,7 @@
 name = "ex1"
 version = "0.1.0"
 description = "Loading Programs - Matrix Data Analysis"
-authors = ["dipekko <dipekko@student.42.fr>"]
+authors = ["jabad-di <jabad-di@student.42.fr>"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
