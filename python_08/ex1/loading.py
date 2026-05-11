@@ -4,12 +4,13 @@
 #                                                          :::      ::::::::  #
 #   loading.py                                           :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <jabad-di@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/04/23 15:37:24 by jabad-di             #+#    #+#            #
-#   Updated: 2026/04/24 13:54:08 by jabad-di            ###   ########.fr      #
+#   Created: 2026/05/11 13:27:39 by jabad-di            #+#    #+#            #
+#   Updated: 2026/05/11 13:28:35 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
 
 import sys
 import importlib
@@ -34,7 +35,7 @@ def check_dependencies() -> None:
             print(f" [ERROR] {pkg} is missing.")
             print(
                 "Install with: pip install -r requirements.txt"
-                "OR poetry install"
+                " OR poetry install"
             )
             sys.exit(1)
 

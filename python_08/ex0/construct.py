@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   construct.py                                         :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: dipekko <dipekko@student.42.fr>              +#+  +:+       +#+       #
+#   By: jabad-di <jabad-di@student.42malaga.com>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/04/22 19:39:44 by jabad-di            #+#    #+#            #
-#   Updated: 2026/04/23 15:34:42 by dipekko            ###   ########.fr      #
+#   Updated: 2026/05/11 13:26:48 by jabad-di           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -17,8 +17,6 @@ import site
 
 
 def is_venv() -> bool:
-    """detecta si el script se ejecuta en un entorno virtual.
-    Usa sys.prefix y sys.base_prefix para comparar"""
     return sys.prefix != sys.base_prefix
 
 
